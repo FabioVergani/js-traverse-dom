@@ -29,8 +29,12 @@ function walk(node,f){
 //
 //e instanceof HTMLElement
 
-function walk(obj,f){var o=obj,p='nodeType';if(o && p in o && o[p]===1){p=f;p(o);o=o.firstChild||false;while(o){walk(o,p);o=o.nextSibling;};};};
+function walk(node,callback){
+ var e=node,f=callback;
+ if(e && e.nodeType===1){f(e);e=e.firstChild||false;while(e){walk(e,f);e=e.nextSibling;};};
+};
+
 
 walk(document.body, function(x){
-    console.log(x.outerHTML);
+    console.log(x.tagName)
 });
