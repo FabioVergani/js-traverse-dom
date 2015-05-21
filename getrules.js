@@ -11,3 +11,10 @@ function css(a) {
     }
     return o;
 }
+
+
+function css(a) {
+ var i,s=document.styleSheets,r,j,o,x=[];
+ for(i in s){r=s[i].rules;for(j in r){o=r[j];if(a.matches(o.selectorText)){x.push(o.cssText);};};};
+ return x;
+}
