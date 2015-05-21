@@ -13,6 +13,7 @@ function walk(node,f){
 //
 //e instanceof HTMLElement
 
+function walk(obj,f){var o=obj,p='nodeType';if(o && p in o && o[p]===1){p=f;p(o);o=o.firstChild||false;while(o){walk(o,p);o=o.nextSibling;};};};
 
 walk(document.body, function(x){
     console.log(x.outerHTML);
