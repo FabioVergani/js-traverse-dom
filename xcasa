@@ -1,0 +1,284 @@
+console.clear();
+//
+
+//
+(function(w){
+	"use strict";
+	function walk(node,filter){var f=filter,e=f(node);while(e){walk(e,f);e=e.nextSibling;}}
+
+
+	function tree(node){
+	 var e=node, f=getProp, i=f(e,'nodeType');
+	 if(i===false){
+		console.error('nodetype:',i);
+	 }else{
+		 i=['','element','attribute','text','cdatasection','entityreference','entity','instruction','comment','document','doctype','fragment','notation'][i];
+		 f=f(tree.handle,i);
+		 if(f!==false){f(e);return e.firstChild;}else{console.debug('%c'+i,'color:#d6d6d6;font-size:11px;font-family:sans-serif;');};
+	 };
+	}
+
+
+
+
+	var d=w.document,
+	isDefined=function(x){return typeof(x)!=='undefined';},
+	callable=(function(o){var b=o.bind;return b.call(b,o.call);})(Function.prototype),
+	hasOwn=callable(Object.prototype.hasOwnProperty),
+	getProp=function(o,p){return (isDefined(o) && (p in o) && hasOwn(o,p))?o[p]:false;},//...
+	result=false;
+
+	//garbage:
+	callable=null;
+
+	//customize:
+	tree.handle={
+		element:function(tag){
+			var e=tag;console.dir(e.tagName);
+		}/*,...*/
+	};
+
+
+
+	walk(d.documentElement,tree);
+})(window);
+
+
+/*
+console.log(e.nodeType);
+ELEMENT::1
+ATTRIBUTE::2
+TEXT::3
+CDATA_SECTION::4
+ENTITY_REFERENCE::5
+ENTITY::6
+PROCESSING_INSTRUCTION::7
+COMMENT::8
+DOCUMENT::9
+DOCUMENT_TYPE::10
+DOCUMENT_FRAGMENT::11
+NOTATION::12
+*/
+
+/*
+Array.prototype.slice.call(arguments, 0); }
+*/
+
+var callable=(function(o){var b=o.bind;return b.call(b,o.call);})(Function.prototype);
+
+
+function stylog(css){
+ var o=console,s=css;
+ return function(){o.log.apply(o,Array.apply(null,arguments).unshift('%c').push(s));};
+}
+
+
+
+
+
+function stylog(css){
+ var o=console,s=css,;
+ return function(){
+	 var m=Array.prototype.slice.call(arguments,0);
+	 m.unshift('%c');
+	 m.push(s);
+	 o.log.apply(o,m);
+ };
+}
+
+log={
+	comment: stylog('font:9px/10px sans-serif;color:#D6D6D6;')
+};
+
+log.comment(46757567567)
+
+++
+
+console.log(x.outerHTML);
+*/
+var selectors=[],root=document.documentElement, win=root.defaultView;
+//
+ function getAppliedSelectors(node) {
+    var m=selectors[],w=win;
+    var rules = w.getMatchedCSSRules(node,'');
+    var i = rules.length;
+    while (i--) {
+      m.push(rules[i].selectorText);
+    }
+    return m;
+  }
+  
+  ++
+  
+  
+
+function css(a) {
+    var sheets = document.styleSheets, o = [];
+    a.matches = a.matches || a.webkitMatchesSelector || a.mozMatchesSelector || a.msMatchesSelector || a.oMatchesSelector;
+    for (var i in sheets) {
+        var rules = sheets[i].rules || sheets[i].cssRules;
+        for (var r in rules) {
+            if (a.matches(rules[r].selectorText)) {
+                o.push(rules[r].cssText);
+            }
+        }
+    }
+    return o;
+}
+
+
+
+
+
+
+// el = a DOM-Node document.getElementById(id);
+function getCssText(el) {
+    var cssText = "";
+    var cssRuleList = window.getMatchedCSSRules(el, '');
+    for (var i = 0; i < cssRuleList.length; i++) {
+        cssText += cssRuleList[i].cssText + " ";
+    }
+    return cssText;
+}
+
+
+function getStyle(oElm, strCssRule){
+    var strValue = "";
+    if(document.defaultView && document.defaultView.getComputedStyle){
+        strValue = document.defaultView
+            .getComputedStyle(oElm, "").getPropertyValue(strCssRule);
+    }
+    else if(oElm.currentStyle){
+        strCssRule = strCssRule.replace(/\-(\w)/g, function (strMatch, p1){
+            return p1.toUpperCase();
+        });
+        strValue = oElm.currentStyle[strCssRule];
+    }
+    return strValue;
+}
+
+
+document.defaultView.getComputedStyle(document.getElementById("custom-header"),"")
+
+
++
+
+function css(a) {
+    var sheets = document.styleSheets, o = [];
+    a.matches = a.matches || a.webkitMatchesSelector || a.mozMatchesSelector || a.msMatchesSelector || a.oMatchesSelector;
+   
+	for(var i in sheets){
+        var rules = sheets[i].rules || sheets[i].cssRules;
+        for (var r in rules) {
+            if (a.matches(rules[r].selectorText)) {
+                o.push(rules[r].cssText);
+            }
+        }
+    }
+    return o;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+	var test = e.matches || e.webkitMatchesSelector || e.mozMatchesSelector || e.msMatchesSelector || e.oMatchesSelector;
+
+function css(e) {
+	var i,ii,x,y,m=document.styleSheets, result=[],  test = e.matches;
+	for(i in m){
+		x = m[i].rules;
+		for(ii in x){
+			y=x[ii];if(test(y.selectorText)){result.push(y.cssText);};
+		};
+    };
+ }
+
+
+
+	
+/**
+ * @param {Object} p
+ * @return {?}
+ */
+function css(p) {
+
+  var ss = document.styleSheets;
+  var css = [];
+  p.matches = p.matches || (p.webkitMatchesSelector || (p.mozMatchesSelector || (p.msMatchesSelector || p.oMatchesSelector)));
+  var j;
+  for (j in ss) {
+    var rules = ss[j].rules || ss[j].cssRules;
+    var i;
+    for (i in rules) {
+      if (p.matches(rules[i].selectorText)) {
+        css.push(rules[i].cssText);
+      }
+    }
+  }
+  return css;
+}
+;
+
+function css(a) {
+    var sheets = document.styleSheets,
+        o = [];
+    a.matches = a.matches || a.webkitMatchesSelector || a.mozMatchesSelector || a.msMatchesSelector || a.oMatchesSelector;
+
+    for (var i in sheets) {
+        var rules = sheets[i].rules || sheets[i].cssRules;
+        for (var r in rules) {
+            if (a.matches(rules[r].selectorText)) {
+                o.push(rules[r].cssText);
+            }
+        }
+    }
+    return o;
+}
+
+/**
+ * @param {Object} p
+ * @return {?}
+ */
+function css(p) {
+
+  var ss = document.styleSheets;
+  /** @type {Array} */
+  var css = [];
+  p.matches = p.matches || (p.webkitMatchesSelector || (p.mozMatchesSelector || (p.msMatchesSelector || p.oMatchesSelector)));
+  var j;
+  for (j in ss) {
+    var rules = ss[j].rules || ss[j].cssRules;
+    var i;
+    for (i in rules) {
+      if (p.matches(rules[i].selectorText)) {
+        css.push(rules[i].cssText);
+      }
+    }
+  }
+  return css;
+}
+;
+
+
+
+
+
+function css(a) {
+ var i,s=document.styleSheets,r,j,o,x=[];
+ for(i in s){r=s[i].rules;for(j in r){o=r[j];if(a.matches(o.selectorText)){x.push(o.cssText);};};};
+ return x;
+}
+
+
+
+
+
+
