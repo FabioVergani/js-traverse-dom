@@ -9,8 +9,9 @@ walk(document.body, function(x){
 });
 
 
-
-
+hasProperty
+function hasProperty(o,p){return Object.prototype.hasOwnProperty.call(o,p);};
+//
 
 function walk(node,callback){
 	var e=node,f=callback;
