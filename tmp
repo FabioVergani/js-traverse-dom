@@ -1,0 +1,18 @@
+console.clear();
+//
+(function(w){
+	"use strict";
+	var d=w.document,
+	isDefined=function(x){return typeof(x)!=='undefined';},
+	shortCall=function(x){return Function.prototype.call.bind(x);},
+	hasOwn=shortCall(Object.prototype.hasOwnProperty),
+	has=function(o,p){return (isDefined(o) && (p in o) && hasOwn(o,p))?o[p]:false;},//...
+	result=false;
+
+	//garbage:
+	shortCall=null;
+
+	//
+console.log(has(d.documentElement,'style'));
+
+})(window);
