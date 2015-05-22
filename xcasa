@@ -279,6 +279,15 @@ function css(a) {
 
 
 
+var shorten=(function(e){
+	var o=e.prototype,b=o.bind,c=(b=b.call(b,b))(o.call);
+	o=console;
+	return {bind:b,call:c,log:c(o.log,o)};
+})(Function);
 
+var log = shorten.log;
+log('hello world'); // --> "hello world"
+
+http://calje.eu/index.php/function-bind-bindfunction-bindfunction-call/
 
 
